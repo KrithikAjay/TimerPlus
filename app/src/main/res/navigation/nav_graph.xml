@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/timer_Fragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.timerplus.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.timerplus.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+   <fragment
+       android:id="@+id/timer_Fragment"
+       android:name="com.example.timerplus.TimerFragment"
+       android:layout_width="404dp"
+       android:layout_height="737dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.0"
+       tools:layout="@layout/timer_fragment"
+       android:label="timer_fragment">
+      <action
+          android:id="@+id/action_timerFragment_to_bgTimerFragment"
+          app:destination="@id/bgTimerFragment" />
+   </fragment>
+   <fragment
+       android:id="@+id/bgTimerFragment"
+       android:name="com.example.timerplus.HistoryFragment"
+       android:label="bg_timer_fragment"
+       tools:layout="@layout/history_fragment" />
 </navigation>
