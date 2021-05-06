@@ -10,9 +10,8 @@ import kotlinx.coroutines.launch
 class HistoryFragmentViewModel(private val repository: HistoryRepository,
                                application: Application
                                ) : ViewModel(){
-
     var history = History()
-   private var recentTime = MutableLiveData<History?>()
+    private var recentTime = MutableLiveData<History?>()
     private val allTimings = repository.getAllTime
     val allTimingsString = Transformations.map(allTimings) { allTimings ->
         formatTimer(allTimings, application.resources)
@@ -49,59 +48,30 @@ class HistoryFragmentViewModel(private val repository: HistoryRepository,
     }
 
 
-    private  fun clear() {
+    fun onClear() {
         viewModelScope.launch {
         repository.clear()
 
-        }
-    }
-
-    private  fun update(night: History) {
-       viewModelScope.launch {
-            repository.update(night)
-        }
-    }
-
-    private fun insert(night: History) {
-        viewModelScope.launch {
-        repository.insert(night)
-        }
-    }
-
-    /**
-     * Executes when the START button is clicked.
-     */
-    fun onStartTracking() {
-        viewModelScope.launch {
-            history.startTimeMilli = System.currentTimeMillis()
-        }
-    }
-
-    /**
-     * Executes when the STOP button is clicked.
-     */
-    fun onStopTracking() {
-        viewModelScope.launch {
-
-            history.endTimeMilli = System.currentTimeMillis()
-
-            insert(history)
-            
-        }
-    }
-
-    /**
-     * Executes when the CLEAR button is clicked.
-     */
-    fun onClear() {
-        viewModelScope.launch {
-            // Clear the database table.
-            clear()
             recentTime.value = null }
         // Show a snackbar message, because it's friendly.
         _showSnackbarEvent.value = true
 
     }
+
+    fun update(night: History) {
+       viewModelScope.launch {
+            repository.update(night)
+        }
+    }
+      fun insert(night: History) {
+        viewModelScope.launch {
+        repository.insert(night)
+        }
+    }
+
+
+
+
 
 
 }

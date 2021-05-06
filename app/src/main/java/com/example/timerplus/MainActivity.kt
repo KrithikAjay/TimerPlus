@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -38,5 +39,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 
 }
