@@ -1,4 +1,4 @@
-package com.example.timerplus
+package com.example.timerplus.timerModel
 
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.example.timerplus.R
+import com.example.timerplus.TimerViewModel
+import com.example.timerplus.TimerViewModelFactory
 import com.example.timerplus.database.HistoryDatabase
 import com.example.timerplus.databinding.TimerFragmentBinding
 
@@ -35,7 +38,7 @@ class TimerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.timer_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.timer_fragment,container,false)
 
 
 

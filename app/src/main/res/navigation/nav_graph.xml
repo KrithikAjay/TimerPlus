@@ -9,7 +9,7 @@
 
    <fragment
        android:id="@+id/timer_Fragment"
-       android:name="com.example.timerplus.TimerFragment"
+       android:name="com.example.timerplus.timerModel.TimerFragment"
        android:layout_width="404dp"
        android:layout_height="737dp"
        app:layout_constraintBottom_toBottomOf="parent"
