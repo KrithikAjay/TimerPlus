@@ -1,4 +1,4 @@
-package com.example.timerplus.history
+package com.example.timerplus.historyModel
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,8 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.timerplus.HistoryApplication
 import com.example.timerplus.R
-import com.example.timerplus.database.HistoryDatabase
-import com.example.timerplus.database.HistoryRepository
 import com.example.timerplus.databinding.HistoryFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 

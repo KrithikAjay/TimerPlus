@@ -25,7 +25,7 @@
    </fragment>
    <fragment
        android:id="@+id/bgTimerFragment"
-       android:name="com.example.timerplus.history.HistoryFragment"
+       android:name="com.example.timerplus.historyModel.HistoryFragment"
        android:label="bg_timer_fragment"
        tools:layout="@layout/history_fragment" >
       <action

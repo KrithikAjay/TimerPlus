@@ -1,18 +1,11 @@
-package com.example.timerplus.history
+package com.example.timerplus.historyModel
 
-import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.content.res.Resources
 import androidx.lifecycle.*
-import com.example.timerplus.MainActivity
 import com.example.timerplus.database.History
-import com.example.timerplus.database.HistoryDatabaseDao
 import com.example.timerplus.database.HistoryRepository
 import com.example.timerplus.formatTimer
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HistoryFragmentViewModel(private val repository: HistoryRepository,
                                application: Application

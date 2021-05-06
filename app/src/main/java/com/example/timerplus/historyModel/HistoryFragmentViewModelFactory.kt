@@ -1,9 +1,8 @@
-package com.example.timerplus.history
+package com.example.timerplus.historyModel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.timerplus.database.HistoryDatabaseDao
 import com.example.timerplus.database.HistoryRepository
 
 
