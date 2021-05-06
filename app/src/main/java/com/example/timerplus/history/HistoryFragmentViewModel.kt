@@ -1,34 +1,43 @@
-package com.example.timerplus
+package com.example.timerplus.history
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.content.res.Resources
 import androidx.lifecycle.*
-import kotlinx.coroutines.CoroutineScope
+import com.example.timerplus.MainActivity
+import com.example.timerplus.database.History
+import com.example.timerplus.database.HistoryDatabaseDao
+import com.example.timerplus.database.HistoryRepository
+import com.example.timerplus.formatTimer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
+class HistoryFragmentViewModel(private val repository: HistoryRepository,
                                application: Application
-) : AndroidViewModel(application){
+                               ) : ViewModel(){
 
-   var history = History()
-    private var recentTime = MutableLiveData<History?>()
-    val alltimings = database.getAlltime()
-    val alltimingsString = Transformations.map(alltimings) { alltimings ->
-        formatTimer(alltimings, application.resources)
+    var history = History()
+   private var recentTime = MutableLiveData<History?>()
+    private val allTimings = repository.getAllTime
+    val allTimingsString = Transformations.map(allTimings) { allTimings ->
+        formatTimer(allTimings, application.resources)
     }
-    val clearButtonVisible = Transformations.map(alltimings) {
-        it?.isNotEmpty()
-    }
-    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+
+    private val _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackBarEvent: LiveData<Boolean>
         get() = _showSnackbarEvent
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = false
     }
+
+
+    
     init {
         initializerecentTime()
     }
+    
     private fun initializerecentTime() {
         viewModelScope.launch {
             recentTime.value = getrecentTimeFromDatabase()
@@ -38,7 +47,7 @@ class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
 
     private suspend fun getrecentTimeFromDatabase(): History? {
 //        return withContext(Dispatchers.IO) {
-        var time = database.getThisTime()
+        var time = repository.getThisTime()
         if (time?.endTimeMilli != time?.startTimeMilli) {
             time = null
         }
@@ -47,21 +56,22 @@ class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
     }
 
 
-    private suspend fun clear() {
-        withContext(Dispatchers.IO) {
-            database.clear()
+    private  fun clear() {
+        viewModelScope.launch {
+        repository.clear()
+
         }
     }
 
-    private suspend fun update(night: History) {
-        withContext(Dispatchers.IO) {
-            database.update(night)
+    private  fun update(night: History) {
+       viewModelScope.launch {
+            repository.update(night)
         }
     }
 
-    private suspend fun insert(night: History) {
-        withContext(Dispatchers.IO) {
-            database.insert(night)
+    private fun insert(night: History) {
+        viewModelScope.launch {
+        repository.insert(night)
         }
     }
 
@@ -70,10 +80,6 @@ class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
      */
     fun onStartTracking() {
         viewModelScope.launch {
-            // Create a new night, which captures the current time,
-            // and insert it into the database.
-
-
             history.startTimeMilli = System.currentTimeMillis()
         }
     }
@@ -87,9 +93,7 @@ class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
             history.endTimeMilli = System.currentTimeMillis()
 
             insert(history)
-
-            // Set state to navigate to the SleepQualityFragment.
-
+            
         }
     }
 
@@ -100,13 +104,10 @@ class HistoryFragmentViewModel(val database: HistoryDatabaseDao,
         viewModelScope.launch {
             // Clear the database table.
             clear()
-
-            // And clear recentTime since it's no longer in the database
-            recentTime.value = null
-        }
-
+            recentTime.value = null }
         // Show a snackbar message, because it's friendly.
         _showSnackbarEvent.value = true
+
     }
 
 

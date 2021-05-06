@@ -1,8 +1,10 @@
-package com.example.timerplus
+package com.example.timerplus.history
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.timerplus.database.HistoryDatabaseDao
+import com.example.timerplus.database.HistoryRepository
 
 
 /**
@@ -11,12 +13,14 @@ import androidx.lifecycle.ViewModelProvider
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
 class HistoryFragmentViewModelFactory(
-    private val dataSource: HistoryDatabaseDao,
-    private val application: Application) : ViewModelProvider.Factory {
+        private val repository: HistoryRepository,
+        val application: Application
+
+        ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HistoryFragmentViewModel::class.java)) {
-            return HistoryFragmentViewModel(dataSource, application) as T
+            return HistoryFragmentViewModel(repository, application ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

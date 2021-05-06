@@ -1,4 +1,4 @@
-package com.example.timerplus
+package com.example.timerplus.database
 
 import android.content.Context
 import androidx.room.Database

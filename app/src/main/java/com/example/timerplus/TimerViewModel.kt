@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.timerplus.database.History
+import com.example.timerplus.database.HistoryDatabaseDao
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -90,8 +92,8 @@ class TimerViewModel(val dataSource: HistoryDatabaseDao, application: Applicatio
 
 }
 class TimerViewModelFactory(
-    private val dataSource: HistoryDatabaseDao,
-    private val application: Application
+        private val dataSource: HistoryDatabaseDao,
+        private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

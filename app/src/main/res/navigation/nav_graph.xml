@@ -25,7 +25,11 @@
    </fragment>
    <fragment
        android:id="@+id/bgTimerFragment"
-       android:name="com.example.timerplus.HistoryFragment"
+       android:name="com.example.timerplus.history.HistoryFragment"
        android:label="bg_timer_fragment"
-       tools:layout="@layout/history_fragment" />
+       tools:layout="@layout/history_fragment" >
+      <action
+          android:id="@+id/action_bgTimerFragment_to_timer_Fragment"
+          app:destination="@id/timer_Fragment" />
+   </fragment>
 </navigation>
