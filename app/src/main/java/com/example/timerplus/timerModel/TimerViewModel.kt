@@ -2,6 +2,7 @@ package com.example.timerplus
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.timerplus.database.History
 import com.example.timerplus.database.HistoryDatabaseDao
@@ -91,7 +92,7 @@ class TimerViewModel(val dataSource: HistoryDatabaseDao, application: Applicatio
     private fun onStartTracking() {
         viewModelScope.launch {
             history.startTimeMilli = System.currentTimeMillis()
-            onStopTracking()
+
 
         }
     }
@@ -111,6 +112,8 @@ class TimerViewModel(val dataSource: HistoryDatabaseDao, application: Applicatio
 
         if (timerTask != null) {
             timerTask!!.cancel()
+
+           onStopTracking()
 
             time = 0.0
             timerStart = false

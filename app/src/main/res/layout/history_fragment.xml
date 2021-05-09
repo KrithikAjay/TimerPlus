@@ -24,33 +24,44 @@
                  from the ViewModel. The click handler is in the ViewModel as well, and
                  you can set it for the Views using this lambda pattern. -->
 
-        <ScrollView
-            android:layout_width="411dp"
-            android:layout_height="628dp"
+        <!--        <ScrollView-->
+        <!--            android:layout_width="411dp"-->
+        <!--            android:layout_height="628dp"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/clear_button"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.0">-->
+
+        <!--            &lt;!&ndash; In the TextView, we can access the nightsString LiveData,-->
+        <!--                     which keeps it displayed and updated in the TextView-->
+        <!--                     whenever it changes. &ndash;&gt;-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/textview"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/margin"-->
+        <!--                android:layout_marginTop="@dimen/margin"-->
+        <!--                android:layout_marginEnd="@dimen/margin"-->
+        <!--                android:gravity="center_horizontal"-->
+        <!--                android:paddingStart="16dp"-->
+        <!--                android:text="@{historyViewModel.allTimingsString}"-->
+        <!--                android:textAlignment="center" />-->
+        <!--        </ScrollView>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/history_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/clear_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <!-- In the TextView, we can access the nightsString LiveData,
-                     which keeps it displayed and updated in the TextView
-                     whenever it changes. -->
-
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:gravity="center_horizontal"
-                android:paddingStart="16dp"
-                android:text="@{historyViewModel.allTimingsString}"
-                android:textAlignment="center" />
-        </ScrollView>
 
         <Button
             android:id="@+id/clear_button"
@@ -71,6 +82,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/amarante"
+            android:paddingTop="16dp"
+            android:text="@string/title"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

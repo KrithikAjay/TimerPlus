@@ -15,7 +15,7 @@
 
 
     <!-- Output to TextView styled with a little HTML -->
-    <string name="title"><![CDATA[<h3>  HERE IS YOUR USAGE  DATA</h3>]]></string>
+    <string name="title"> HERE IS YOUR USAGE DATA </string>
     <string name="start_time"><![CDATA[<b>Start:</b>]]></string>
     <string name="end_time"><![CDATA[<b>End:</b>]]></string>
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
@@ -37,6 +37,7 @@
     <string name="minutes_length">%d minutes on %s</string>
     <string name="hours_length">%d hours on %s</string>
     <string name="seconds_length">%d seconds on %s</string>
+    <string name="wednesday">Wednesday</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

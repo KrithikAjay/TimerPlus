@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.timerplus.HistoryApplication
@@ -42,6 +43,17 @@ class HistoryFragment : Fragment() {
         binding.historyViewModel = historyViewModel
 
         binding.lifecycleOwner = this
+        val adapter = HistoryAdapter()
+        binding.historyList.adapter = adapter
+
+        historyViewModel.allTimings.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+
+
+        })
+
 
         historyViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.

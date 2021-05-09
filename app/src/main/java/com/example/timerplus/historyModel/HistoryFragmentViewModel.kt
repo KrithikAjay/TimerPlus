@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.timerplus.database.History
 import com.example.timerplus.database.HistoryRepository
-import com.example.timerplus.formatTimer
 import kotlinx.coroutines.launch
 
 class HistoryFragmentViewModel(private val repository: HistoryRepository,
@@ -12,10 +11,10 @@ class HistoryFragmentViewModel(private val repository: HistoryRepository,
                                ) : ViewModel(){
     var history = History()
     private var recentTime = MutableLiveData<History?>()
-    private val allTimings = repository.getAllTime
-    val allTimingsString = Transformations.map(allTimings) { allTimings ->
-        formatTimer(allTimings, application.resources)
-    }
+     val allTimings = repository.getAllTime
+//    val allTimingsString = Transformations.map(allTimings) { allTimings ->
+//        formatTimer(allTimings, application.resources)
+//    }
 
     private val _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackBarEvent: LiveData<Boolean>

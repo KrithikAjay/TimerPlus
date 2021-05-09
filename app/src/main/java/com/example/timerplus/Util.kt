@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.example.timerplus.database.History
 
@@ -35,6 +36,7 @@ private val ONE_HOUR_MILLIS = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
 fun convertDurationToFormatted(startTimeMilli: Long, endTimeMilli: Long, res: Resources): String {
     val durationMilli = endTimeMilli - startTimeMilli
     val weekdayString = SimpleDateFormat("EEEE", Locale.getDefault()).format(startTimeMilli)
+
     return when {
         durationMilli < ONE_MINUTE_MILLIS -> {
             val seconds = TimeUnit.SECONDS.convert(durationMilli, TimeUnit.MILLISECONDS)
@@ -84,31 +86,62 @@ fun convertLongToDateString(systemTime: Long): String {
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
 
-fun formatTimer(time: List<History>, resources: Resources): Spanned {
+//fun formatTimer(time: List<History>, resources: Resources): Spanned {
+//    val sb = StringBuilder()
+//    sb.apply {
+//        append(resources.getString(R.string.title))
+//        time.forEach {
+//            append("<br>")
+//            append(resources.getString(R.string.start_time))
+//            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
+//            if (it.endTimeMilli != it.startTimeMilli) {
+//                append(resources.getString(R.string.end_time))
+//                append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
+//                append(resources.getString(R.string.hours_slept))
+//                // Hours
+//                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
+//                // Minutes
+//                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
+//                // Seconds
+//                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
+//            }
+//        }
+//    }
+//    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//        Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+//    } else {
+//        HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+//    }
+//}
+fun formatHistory(startTimeMilli: Long, endTimeMilli: Long, res: Resources): Spanned{
+
     val sb = StringBuilder()
     sb.apply {
-        append(resources.getString(R.string.title))
-        time.forEach {
-            append("<br>")
-            append(resources.getString(R.string.start_time))
-            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
-            if (it.endTimeMilli != it.startTimeMilli) {
-                append(resources.getString(R.string.end_time))
-                append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
-                append(resources.getString(R.string.hours_slept))
-                // Hours
-                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
-                // Minutes
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
-                // Seconds
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
-            }
+//        append(res.getString(R.string.title))
+        append("<br>")
+//
+        append(res.getString(R.string.start_time))
+        append("\t${convertLongToDateString(startTimeMilli)}<br>")
+        if (endTimeMilli != startTimeMilli) {
+            append(res.getString(R.string.end_time))
+            append("\t${convertLongToDateString(endTimeMilli)}<br>")
+            append(res.getString(R.string.hours_slept))
+            // Hours
+            append("\t ${endTimeMilli.minus(startTimeMilli) / 1000 / 60 / 60}:")
+            // Minutes
+            append("${endTimeMilli.minus(startTimeMilli) / 1000 / 60}:")
+            // Seconds
+            append("${endTimeMilli.minus(startTimeMilli) / 1000}")
+
+
+
         }
-    }
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-}
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
+
+
+    }}
 
