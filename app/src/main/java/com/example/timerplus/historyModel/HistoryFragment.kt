@@ -47,6 +47,9 @@ class HistoryFragment : Fragment() {
         binding.historyList.adapter = adapter
 
         historyViewModel.allTimings.observe(viewLifecycleOwner, Observer {
+            if(it.isEmpty()){
+                Toast.makeText(context,"NO DATA TO DISPLAY",Toast.LENGTH_SHORT).show()
+            }
             it?.let {
                 adapter.submitList(it)
             }
